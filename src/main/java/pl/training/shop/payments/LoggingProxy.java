@@ -2,20 +2,31 @@ package pl.training.shop.payments;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.*;
 
 @Aspect
 @Log
 @RequiredArgsConstructor
 public class LoggingProxy {
 
-    private static final String LOG_FORMAT = "A new payment of %s has been initiated";
+    @Before("@annotation(LogPayments) && args(paymentRequest)")
+    public void log(PaymentRequest paymentRequest) {
+        log.info("New payment request: " + paymentRequest);
+    }
 
     @AfterReturning(value = "@annotation(LogPayments)", returning = "payment")
     public void log(Payment payment) {
-        var entry = String.format(LOG_FORMAT, payment.getMoney());
-        log.info(entry);
+        log.info("New payment created: " + payment);
+    }
+
+    @AfterThrowing(value = "@annotation(LogPayments)", throwing = "exception")
+    public void log(PaymentFailedException exception) {
+        log.info("Payment failed: " + exception);
+    }
+
+    @After("@annotation(LogPayments)")
+    public void log() {
+        log.info("After payment");
     }
 
     public void init() {
