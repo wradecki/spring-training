@@ -1,6 +1,8 @@
 package pl.training.shop.payments;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.*;
+import pl.training.shop.commons.LoggingBeanPostProcessor;
 import pl.training.shop.commons.profiler.Profiler;
 import pl.training.shop.commons.retry.Repeater;
 
@@ -42,6 +44,21 @@ public class PaymentsConfiguration {
     @Bean
     public Repeater repeater() {
         return new Repeater();
+    }
+
+    @Bean
+    public LoggingBeanPostProcessor loggingBeanPostProcessor() {
+        return new LoggingBeanPostProcessor();
+    }
+
+    @Bean
+    public PaymentEventsPublisher paymentEventsPublisher(ApplicationEventPublisher eventPublisher) {
+        return new PaymentEventsPublisher(eventPublisher);
+    }
+
+    @Bean
+    public PaymentEventsListener paymentEventsListener() {
+       return new PaymentEventsListener();
     }
 
 }
