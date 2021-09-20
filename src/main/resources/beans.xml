@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+    <bean id="incremental" class="pl.training.shop.payments.IncrementalPaymentIdGenerator" scope="singleton"/>
+
+    <bean id="uuid" class="pl.training.shop.payments.UUIDPaymentIdGenerator"/>
+
+    <bean id="hashSetPaymentRepository" class="pl.training.shop.payments.HashSetPaymentRepository"/>
+
+    <bean id="localPaymentService" class="pl.training.shop.payments.LocalPaymentService">
+        <constructor-arg name="paymentIdGenerator" ref="uuid"/>
+        <constructor-arg name="paymentRepository" ref="hashSetPaymentRepository"/>
+    </bean>
+
+    <bean id="loggingProxy" class="pl.training.shop.payments.LoggingProxy" init-method="init" destroy-method="destroy"/>
+
+    <aop:config>
+        <aop:aspect ref="loggingProxy">
+            <aop:after-returning method="log" returning="payment" pointcut="@annotation(pl.training.shop.payments.LogPayments)"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
