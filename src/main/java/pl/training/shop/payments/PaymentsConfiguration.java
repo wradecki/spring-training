@@ -1,6 +1,8 @@
 package pl.training.shop.payments;
 
 import org.springframework.context.annotation.*;
+import pl.training.shop.commons.profiler.Profiler;
+import pl.training.shop.commons.retry.Repeater;
 
 @EnableAspectJAutoProxy
 @Configuration
@@ -30,6 +32,16 @@ public class PaymentsConfiguration {
     @Bean(initMethod = "init", destroyMethod = "destroy")
     public LoggingProxy loggingProxy() {
         return new LoggingProxy();
+    }
+
+    @Bean
+    public Profiler profiler() {
+        return new Profiler();
+    }
+
+    @Bean
+    public Repeater repeater() {
+        return new Repeater();
     }
 
 }
