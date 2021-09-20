@@ -6,6 +6,9 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 @Aspect
 @Component
 @Log
@@ -18,6 +21,16 @@ public class LoggingProxy {
     public void log(Payment payment) {
         var entry = String.format(LOG_FORMAT, payment.getMoney());
         log.info(entry);
+    }
+
+    @PostConstruct
+    public void init() {
+        log.info("Initializing logging proxy");
+    }
+
+    @PreDestroy
+    public void destroy() {
+        log.info("Shutting down logging proxy");
     }
 
 }
