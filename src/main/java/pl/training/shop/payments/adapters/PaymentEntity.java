@@ -28,7 +28,7 @@ public class PaymentEntity {
     @Id
     private String id;
     //@Convert(converter = FastMoneyConverter.class)
-    private FastMoney money;
+    private FastMoney value;
     private Instant timestamp;
     private String status;
 
