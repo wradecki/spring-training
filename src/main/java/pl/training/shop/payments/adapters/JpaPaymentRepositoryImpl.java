@@ -15,7 +15,7 @@ public class JpaPaymentRepositoryImpl implements JpaPaymentRepositoryCustom {
 
     @Override
     public List<PaymentEntity> getGreaterThen(FastMoney value) {
-        return entityManager.createQuery("select p from PaymentEntity p where p.money >= :value", PaymentEntity.class)
+        return entityManager.createQuery("select p from PaymentEntity p where p.value >= :value", PaymentEntity.class)
                 .setParameter("value", value)
                 .getResultList();
     }

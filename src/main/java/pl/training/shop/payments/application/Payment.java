@@ -12,7 +12,7 @@ import java.time.Instant;
 public class Payment {
 
     private String id;
-    private FastMoney money;
+    private FastMoney value;
     private Instant timestamp;
     private PaymentStatus status;
 
