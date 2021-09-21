@@ -9,9 +9,12 @@ import java.util.Locale;
 public class LocalMoney {
 
     public static FastMoney of(Number number) {
+        return FastMoney.of(number, getDefaultCurrency());
+    }
+
+    private static CurrencyUnit getDefaultCurrency() {
         var locale = Locale.getDefault();
-        var currencyUnit = Monetary.getCurrency(locale);
-        return FastMoney.of(number, currencyUnit);
+        return Monetary.getCurrency(locale);
     }
 
 }
