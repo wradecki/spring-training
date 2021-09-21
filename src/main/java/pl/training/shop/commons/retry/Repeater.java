@@ -14,7 +14,7 @@ public class Repeater {
     @Around("@annotation(Retry)")
     public Object tryExecute(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         var method = ((MethodSignature) proceedingJoinPoint.getSignature()).getMethod();
-        var annotation = AnnotationUtils.getAnnotation(method, Retry.class);
+        var annotation = method.getAnnotation(Retry.class);
         if (annotation == null) {
             throw new IllegalStateException();
         }
