@@ -10,7 +10,7 @@ public class LoggingProxy {
     private static final String LOG_FORMAT = "A new payment of %s has been initiated";
 
     public void log(Payment payment) {
-        var entry = String.format(LOG_FORMAT, payment.getMoney());
+        var entry = String.format(LOG_FORMAT, payment.getValue());
         log.info(entry);
     }
 
