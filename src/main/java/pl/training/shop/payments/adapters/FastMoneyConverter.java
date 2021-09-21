@@ -1,6 +1,7 @@
 package pl.training.shop.payments.adapters;
 
 import org.javamoney.moneta.FastMoney;
+import pl.training.shop.payments.application.LocalMoney;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
