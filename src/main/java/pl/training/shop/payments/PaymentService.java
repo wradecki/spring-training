@@ -14,7 +14,7 @@ public class PaymentService {
     public Payment process(PaymentRequest paymentRequest) {
         var payment = Payment.builder()
                 .id(paymentIdGenerator.getNext())
-                .money(paymentRequest.getMoney())
+                .value(paymentRequest.getMoney())
                 .timestamp(Instant.now())
                 .status(PaymentStatus.STARTED)
                 .build();
@@ -23,7 +23,7 @@ public class PaymentService {
     }
 
     private String createLogEntry(Payment payment) {
-        return String.format(LOG_FORMAT, payment.getMoney());
+        return String.format(LOG_FORMAT, payment.getValue());
     }
 
 }
