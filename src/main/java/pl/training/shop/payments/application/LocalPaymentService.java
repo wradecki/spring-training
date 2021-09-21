@@ -1,12 +1,15 @@
-package pl.training.shop.payments;
+package pl.training.shop.payments.application;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
+import pl.training.shop.payments.api.PaymentRepository;
+import pl.training.shop.payments.api.PaymentService;
 
+import javax.transaction.Transactional;
 import java.time.Instant;
 
 @Transactional
-@RequiredArgsConstructor
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class LocalPaymentService implements PaymentService {
 
     private final PaymentIdGenerator paymentIdGenerator;

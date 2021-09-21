@@ -2,9 +2,9 @@ package pl.training.shop;
 
 import lombok.extern.java.Log;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import pl.training.shop.payments.LocalMoney;
-import pl.training.shop.payments.PaymentRequest;
-import pl.training.shop.payments.PaymentService;
+import pl.training.shop.payments.adapters.LocalMoney;
+import pl.training.shop.payments.application.PaymentRequest;
+import pl.training.shop.payments.api.PaymentService;
 
 @Log
 public class Application {

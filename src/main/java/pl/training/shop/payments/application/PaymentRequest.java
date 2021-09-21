@@ -1,4 +1,4 @@
-package pl.training.shop.payments;
+package pl.training.shop.payments.application;
 
 import lombok.Builder;
 import lombok.Value;

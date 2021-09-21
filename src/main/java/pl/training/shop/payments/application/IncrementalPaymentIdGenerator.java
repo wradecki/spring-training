@@ -1,8 +1,8 @@
-package pl.training.shop.payments;
+package pl.training.shop.payments.application;
 
 import lombok.Setter;
 
-public class IncrementalPaymentIdGenerator implements PaymentIdGenerator {
+class IncrementalPaymentIdGenerator implements PaymentIdGenerator {
 
     private static final String ID_FORMAT = "%010d";
 

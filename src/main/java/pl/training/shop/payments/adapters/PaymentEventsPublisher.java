@@ -1,18 +1,22 @@
-package pl.training.shop.payments;
+package pl.training.shop.payments.adapters;
 
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Component;
+import pl.training.shop.payments.application.Payment;
+import pl.training.shop.payments.application.PaymentEvent;
 
+@Component
 @Aspect
 @RequiredArgsConstructor
 public class PaymentEventsPublisher {
 
     private final ApplicationEventPublisher eventPublisher;
 
-    @Pointcut("@annotation(LogPayments)")
+    @Pointcut("@annotation(pl.training.shop.payments.application.LogPayments)")
     public void logPayments() {
     }
 

@@ -1,18 +1,25 @@
-package pl.training.shop.payments;
+package pl.training.shop.payments.adapters;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+import pl.training.shop.payments.application.PaymentFailedException;
+import pl.training.shop.payments.application.PaymentRequest;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 @Order(100_000)
+@Component
 @Aspect
 @Log
 @RequiredArgsConstructor
 public class LoggingProxy {
 
-    @Pointcut("@annotation(LogPayments)")
+    @Pointcut("@annotation(pl.training.shop.payments.application.LogPayments)")
     public void logPayments() {
     }
 
@@ -22,7 +29,7 @@ public class LoggingProxy {
     }
 
     @AfterReturning(value = "logPayments()", returning = "payment")
-    public void log(Payment payment) {
+    public void log(PaymentEntity payment) {
         log.info("New payment created: " + payment);
     }
 
@@ -37,10 +44,12 @@ public class LoggingProxy {
         log.info("After payment");
     }
 
+    @PostConstruct
     public void init() {
         log.info("Initializing logging proxy");
     }
 
+    @PreDestroy
     public void destroy() {
         log.info("Shutting down logging proxy");
     }

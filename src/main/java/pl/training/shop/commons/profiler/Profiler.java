@@ -12,7 +12,7 @@ import org.springframework.core.annotation.Order;
 @Log
 public class Profiler implements Ordered {
 
-    @Around("execution(* pl.training.shop.payments.LocalPaymentService.*(..))")
+    @Around("execution(* pl.training.shop.payments.application.LocalPaymentService.*(..))")
     //@Around("bean(localPaymentService)")
     public Object logExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         var startTime = System.nanoTime();

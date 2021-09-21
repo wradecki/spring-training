@@ -13,6 +13,9 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import pl.training.shop.payments.application.PaymentsServiceFactory;
+import pl.training.shop.payments.api.PaymentRepository;
+import pl.training.shop.payments.api.PaymentService;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -23,6 +26,13 @@ import java.util.Properties;
 @EnableAspectJAutoProxy
 @Configuration
 public class ShopConfiguration {
+
+    private final PaymentsServiceFactory paymentsServiceFactory = new PaymentsServiceFactory();
+
+    @Bean
+    public PaymentService paymentService(PaymentRepository paymentRepository) {
+        return paymentsServiceFactory.create(paymentRepository);
+    }
 
     @Bean
     public PropertiesFactoryBean jpaProperties() {

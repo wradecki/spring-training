@@ -1,11 +1,14 @@
-package pl.training.shop.payments;
+package pl.training.shop.payments.adapters;
 
 import lombok.extern.java.Log;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
+import pl.training.shop.payments.application.PaymentEvent;
 
+@Component
 @Log
-public class PaymentEventsListener {
+public class PaymentLogger {
 
     @Async
     @EventListener
