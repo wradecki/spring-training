@@ -8,13 +8,11 @@ import org.javamoney.moneta.FastMoney;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import java.time.Instant;
 import java.util.Objects;
 
 // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-@NamedQuery(name = PaymentEntity.SELECT_BY_STATUS, query = "select p from PaymentEntity p where p.status = :status")
 @Table(name = "payments")
 @Entity
 @Builder
@@ -22,8 +20,6 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentEntity {
-
-    public static final String SELECT_BY_STATUS = "paymentSelectByStatus";
 
     @Id
     private String id;
