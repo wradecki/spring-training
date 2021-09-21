@@ -14,7 +14,7 @@ public class LoggingProxy {
 
     @AfterReturning(value = "@annotation(LogPayments)", returning = "payment")
     public void log(Payment payment) {
-        var entry = String.format(LOG_FORMAT, payment.getMoney());
+        var entry = String.format(LOG_FORMAT, payment.getValue());
         log.info(entry);
     }
 
