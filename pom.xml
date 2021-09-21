@@ -9,11 +9,13 @@
     <artifactId>spring-training</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <packaging>war</packaging>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
         <spring.version>5.3.10</spring.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
     </properties>
@@ -27,6 +29,11 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
         <dependency>
@@ -75,6 +82,12 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
             <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>8.0.1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

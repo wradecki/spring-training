@@ -68,4 +68,6 @@ public class ShopConfiguration {
         return new JpaTransactionManager(entityManagerFactory);
     }
 
+
+
 }
