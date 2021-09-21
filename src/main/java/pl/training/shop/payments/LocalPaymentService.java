@@ -1,9 +1,11 @@
 package pl.training.shop.payments;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 
+@Transactional
 @RequiredArgsConstructor
 public class LocalPaymentService implements PaymentService {
 

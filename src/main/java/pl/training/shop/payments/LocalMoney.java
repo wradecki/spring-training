@@ -14,4 +14,8 @@ public class LocalMoney {
         return FastMoney.of(number, currencyUnit);
     }
 
+    public static FastMoney zero() {
+        return of(0);
+    }
+
 }

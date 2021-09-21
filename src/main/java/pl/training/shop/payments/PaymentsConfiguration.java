@@ -1,12 +1,9 @@
 package pl.training.shop.payments;
 
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.annotation.*;
-import pl.training.shop.commons.LoggingBeanPostProcessor;
-import pl.training.shop.commons.profiler.Profiler;
-import pl.training.shop.commons.retry.Repeater;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@EnableAspectJAutoProxy
 @Configuration
 public class PaymentsConfiguration {
 
@@ -22,8 +19,8 @@ public class PaymentsConfiguration {
     }
 
     @Bean
-    public PaymentRepository hashSetPaymentsRepository() {
-        return new HashSetPaymentRepository();
+    public PaymentRepository paymentsRepository() {
+        return new JpaPaymentRepository();
     }
 
     @Bean
@@ -34,21 +31,6 @@ public class PaymentsConfiguration {
     @Bean(initMethod = "init", destroyMethod = "destroy")
     public LoggingProxy loggingProxy() {
         return new LoggingProxy();
-    }
-
-    @Bean
-    public Profiler profiler() {
-        return new Profiler();
-    }
-
-    @Bean
-    public Repeater repeater() {
-        return new Repeater();
-    }
-
-    @Bean
-    public LoggingBeanPostProcessor loggingBeanPostProcessor() {
-        return new LoggingBeanPostProcessor();
     }
 
     @Bean
