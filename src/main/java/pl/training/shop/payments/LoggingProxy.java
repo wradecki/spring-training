@@ -19,7 +19,7 @@ public class LoggingProxy implements PaymentService {
     }
 
     private String createLogEntry(Payment payment) {
-        return String.format(LOG_FORMAT, payment.getMoney());
+        return String.format(LOG_FORMAT, payment.getValue());
     }
 
 }
