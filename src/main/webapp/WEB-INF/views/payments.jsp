@@ -24,6 +24,13 @@
         </c:forEach>
         </tbody>
     </table>
+    <c:if test="${resultPage.pageNumber > 0}">
+        <a href="payments.html?pageNumber=${resultPage.pageNumber - 1}">Back</a>
+    </c:if>
+    <c:if test="${resultPage.pageNumber + 1 < resultPage.totalPages}">
+        <a href="payments.html?pageNumber=${resultPage.pageNumber + 1}" class="float-right">Next</a>
+    </c:if>
+    <div class="text-center">${resultPage.pageNumber + 1} / ${resultPage.totalPages}</div>
 </div>
 </body>
 </html>
