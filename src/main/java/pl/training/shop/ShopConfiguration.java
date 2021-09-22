@@ -17,10 +17,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import pl.training.shop.payments.api.PaymentRepository;
 import pl.training.shop.payments.api.PaymentService;
 import pl.training.shop.payments.application.PaymentsServiceFactory;
@@ -86,6 +83,14 @@ public class ShopConfiguration implements WebMvcConfigurer {
         var messagesSource = new ResourceBundleMessageSource();
         messagesSource.setBasename("messages");
         return messagesSource;
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**")
+                .allowedMethods("*")
+                .allowedHeaders("*")
+                .allowedOrigins("http://localhost:4200");
     }
 
     @Override
