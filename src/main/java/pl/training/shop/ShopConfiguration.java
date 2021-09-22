@@ -3,10 +3,12 @@ package pl.training.shop;
 import com.zaxxer.hikari.HikariDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -14,10 +16,14 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import pl.training.shop.payments.application.PaymentsServiceFactory;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pl.training.shop.payments.api.PaymentRepository;
 import pl.training.shop.payments.api.PaymentService;
+import pl.training.shop.payments.application.PaymentsServiceFactory;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -29,7 +35,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
 @Configuration
-public class ShopConfiguration {
+public class ShopConfiguration implements WebMvcConfigurer {
 
     private final PaymentsServiceFactory paymentsServiceFactory = new PaymentsServiceFactory();
 
@@ -70,6 +76,27 @@ public class ShopConfiguration {
         return new JpaTransactionManager(entityManagerFactory);
     }
 
+    @Bean
+    public LocalValidatorFactoryBean validatorFactory() {
+        return new LocalValidatorFactoryBean();
+    }
 
+    @Bean
+    public MessageSource messageSource() {
+        var messagesSource = new ResourceBundleMessageSource();
+        messagesSource.setBasename("messages");
+        return messagesSource;
+    }
+
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        registry.jsp("/WEB-INF/views/", ".jsp");
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("index");
+        registry.addViewController("index.html").setViewName("index");
+    }
 
 }

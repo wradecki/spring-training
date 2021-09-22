@@ -4,7 +4,9 @@ import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ValueMapping;
+import pl.training.shop.commons.ResultPage;
 import pl.training.shop.commons.money.FastMoneyModelMapper;
+import pl.training.shop.commons.web.ResultPageDto;
 import pl.training.shop.payments.application.Payment;
 import pl.training.shop.payments.application.PaymentRequest;
 import pl.training.shop.payments.application.PaymentStatus;
@@ -26,5 +28,7 @@ public interface RestPaymentModelMapper {
 
     @IterableMapping(elementTargetType = PaymentDto.class)
     List<PaymentDto> toDto(List<Payment> payments);
+
+    ResultPageDto<PaymentDto> toDto(ResultPage<Payment> resultPage);
 
 }

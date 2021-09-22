@@ -9,6 +9,7 @@ import org.javamoney.moneta.FastMoney;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -24,6 +25,7 @@ public class PaymentEntity {
     @Id
     private String id;
     //@Convert(converter = FastMoneyConverter.class)
+    @NotNull
     private FastMoney value;
     private Instant timestamp;
     private String status;
