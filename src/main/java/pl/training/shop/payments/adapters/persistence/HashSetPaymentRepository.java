@@ -1,4 +1,4 @@
-package pl.training.shop.payments.adapters;
+package pl.training.shop.payments.adapters.persistence;
 
 import lombok.Setter;
 import pl.training.shop.commons.ResultPage;

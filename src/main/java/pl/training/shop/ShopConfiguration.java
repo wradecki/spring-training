@@ -14,6 +14,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import pl.training.shop.payments.application.PaymentsServiceFactory;
 import pl.training.shop.payments.api.PaymentRepository;
 import pl.training.shop.payments.api.PaymentService;
@@ -23,6 +24,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @PropertySource("classpath:jdbc.properties")
+@EnableWebMvc
 @EnableJpaRepositories
 @EnableTransactionManagement
 @EnableAspectJAutoProxy

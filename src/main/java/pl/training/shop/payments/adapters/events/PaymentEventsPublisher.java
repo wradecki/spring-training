@@ -1,4 +1,4 @@
-package pl.training.shop.payments.adapters;
+package pl.training.shop.payments.adapters.events;
 
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.annotation.AfterReturning;

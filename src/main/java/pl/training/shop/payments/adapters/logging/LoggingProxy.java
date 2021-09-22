@@ -1,4 +1,4 @@
-package pl.training.shop.payments.adapters;
+package pl.training.shop.payments.adapters.logging;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -6,6 +6,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import pl.training.shop.payments.adapters.persistence.PaymentEntity;
 import pl.training.shop.payments.application.PaymentFailedException;
 import pl.training.shop.payments.application.PaymentRequest;
 

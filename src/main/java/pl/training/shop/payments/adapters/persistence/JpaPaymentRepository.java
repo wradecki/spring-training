@@ -1,4 +1,4 @@
-package pl.training.shop.payments.adapters;
+package pl.training.shop.payments.adapters.persistence;
 
 import org.javamoney.moneta.FastMoney;
 import org.springframework.data.domain.Page;

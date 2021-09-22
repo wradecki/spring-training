@@ -1,8 +1,7 @@
-package pl.training.shop.payments.adapters;
+package pl.training.shop.payments.adapters.persistence;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import pl.training.shop.commons.ResultPage;
 import pl.training.shop.payments.api.PaymentRepository;

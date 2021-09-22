@@ -1,3 +1,20 @@
-GET http://localhost:8080/sayHello
-Accept: text/plain
-Content-Type: text/plain
+POST http://localhost:8080/payments
+Accept: application/json
+Content-Type: application/json
+
+{
+  "requestId": 1,
+  "value": "200 PLN"
+}
+
+###
+
+GET http://localhost:8080/payments/bc3235e8-8d0f-4bab-bec3-0a648ac1e66
+Accept: application/json
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/payments/started?pageNumber=0
+Accept: application/json
+Content-Type: application/json
