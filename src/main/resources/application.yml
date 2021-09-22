@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    username: admin
+    password: admin
+    url: jdbc:postgresql://localhost:5432/shop
+    driver-class-name: org.postgresql.Driver
+  #messages:
+  #  basename: messages
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
