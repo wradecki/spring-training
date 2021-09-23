@@ -19,7 +19,6 @@
     <properties>
         <java.version>11</java.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
-        <swagger.version>3.0.0</swagger.version>
     </properties>
 
     <build>
@@ -47,12 +46,7 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
-            <version>${swagger.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger.version}</version>
+            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
