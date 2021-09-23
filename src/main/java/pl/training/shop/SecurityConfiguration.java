@@ -18,6 +18,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
+import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 
 @KeycloakConfiguration
@@ -53,11 +54,24 @@ public class SecurityConfiguration extends KeycloakWebSecurityConfigurerAdapter 
        return source;
     }
 
+    private static final String[] AUTH_LIST = {
+            "/v2/api-docs",
+            "/configuration/ui",
+            "/swagger-resources",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/v3/api-docs",
+            "/swagger-resources/**",
+            "/swagger-ui/**"
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         http.cors().and().csrf().disable()
                 .authorizeRequests()
+                    .mvcMatchers(GET, AUTH_LIST).permitAll()
                     .mvcMatchers(POST,"/api/payments").hasRole("ADMIN")
                     .mvcMatchers("/api/**").hasRole("USER");
     }
