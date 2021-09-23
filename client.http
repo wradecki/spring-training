@@ -1,3 +1,4 @@
+// @no-cookie-jar
 POST http://localhost:8080/api/payments
 Accept: application/json
 Content-Type: application/json
@@ -9,8 +10,8 @@ Content-Type: application/json
 
 ###
 
+// @no-cookie-jar
 GET http://localhost:8080/api/payments/bc3235e8-8d0f-4bab-bec3-0a648ac1e66
-Authorization: Basic dXNlcjoxMjM=
 Accept: application/json
 Content-Type: application/json
 
@@ -19,3 +20,17 @@ Content-Type: application/json
 GET http://localhost:8080/api/payments/started?pageNumber=0
 Accept: application/json
 Content-Type: application/json
+
+###
+// @no-cookie-jar
+POST http://localhost:8100/auth/realms/shop/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=shop-rest&grant_type=password&username=owner&password=123
+
+###
+// @no-cookie-jar
+POST http://localhost:8100/auth/realms/shop/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=shop-rest&grant_type=refresh_token&refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhZjE4MGY3MS0zOGNlLTQ2ZDEtOWU4Mi1hNjE2MTNjNjkxOGUifQ.eyJleHAiOjE2MzIzOTI2ODMsImlhdCI6MTYzMjM5MDg4MywianRpIjoiY2U1NDU2NTgtOGNkOS00NTliLTg5MjgtOGMwZmIwNGE2MzM5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTAwL2F1dGgvcmVhbG1zL3Nob3AiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgxMDAvYXV0aC9yZWFsbXMvc2hvcCIsInN1YiI6ImU1OTk4ZjFkLTY1YjgtNDA4OS05OWY0LTU1NWJmMjkzYWM1MyIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJzaG9wLXJlc3QiLCJzZXNzaW9uX3N0YXRlIjoiYTY2MzQ4NzktZDYxNC00YzlhLThiMGQtOGYwNjBkZWU2ODQ1Iiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiYTY2MzQ4NzktZDYxNC00YzlhLThiMGQtOGYwNjBkZWU2ODQ1In0.468L0c86KVIZbTA4fjNzwpc09eM67XyKqIX5a9zXGNU
