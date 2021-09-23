@@ -2,8 +2,9 @@ version: '3'
 services:
   database:
     image: postgres:13-alpine
-    ports:
-      - "5432:5432"
+    restart: always
+    #ports:
+    #  - "5432:5432"
     environment:
       - POSTGRES_DB=shop
       - POSTGRES_USER=admin
@@ -13,13 +14,19 @@ services:
       - ./data:/var/lib/postgresql/data/application
   pgadmin:
     image: dpage/pgadmin4:4
-    ports:
-      - "8000:80"
+    restart: always
+    depends_on:
+      - database
+    #ports:
+    #  - "8000:80"
     environment:
       - PGADMIN_DEFAULT_EMAIL=training@sages.pl
       - PGADMIN_DEFAULT_PASSWORD=admin
   keycloak:
     image: jboss/keycloak:15.0.2
+    restart: always
+    depends_on:
+      - database
     environment:
       KEYCLOAK_USER: "admin"
       KEYCLOAK_PASSWORD: "admin"
@@ -28,5 +35,32 @@ services:
       DB_USER: "admin"
       DB_PASSWORD: "admin"
       DB_DATABASE: "shop"
+      KEYCLOAK_FRONTEND_URL: "http://keycloak:8080/auth"
     ports:
       - "8100:8080"
+  shop-backend:
+    image: shop
+    restart: always
+    depends_on:
+      - database
+      - keycloak
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://database:5432/shop"
+      KEYCLOAK_AUTH_SERVER_URL: http://keycloak:8080/auth
+    #ports:
+    #  - "8080:8080"
+  shop-frontend:
+    image: nginx:1.21.3-alpine
+    restart: always
+    #ports:
+    #  - "8200:80"
+    volumes:
+      - ./deployment/frontend/html:/usr/share/nginx/html
+      - ./deployment/frontend/configuration:/etc/nginx/conf.d
+  proxy:
+    image: nginx:1.21.3-alpine
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./deployment/proxy:/etc/nginx/conf.d
