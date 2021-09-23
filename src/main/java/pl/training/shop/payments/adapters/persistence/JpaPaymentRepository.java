@@ -15,7 +15,7 @@ public interface JpaPaymentRepository extends JpaRepository<PaymentEntity, Strin
 
     Page<PaymentEntity> getByStatus(String status, Pageable pageable);
 
-    @Query("select p from PaymentEntity p where p.status = 'COMPLETED' and p.value = :value")
+    @Query("select p from PaymentEntity p where p.status = 'CONFIRMED' and p.value = :value")
     List<PaymentEntity> getCompletedWithValue(@Param("value") FastMoney value);
 
 }
