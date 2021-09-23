@@ -2,6 +2,7 @@ package pl.training.shop.payments.adapters.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -11,13 +12,14 @@ import pl.training.shop.commons.web.ResultPageDto;
 import pl.training.shop.commons.web.UriBuilder;
 import pl.training.shop.payments.api.PaymentService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static pl.training.shop.payments.application.PaymentStatus.STARTED;
 
 /*@Validated*/
-@RequestMapping(value = "api/payments", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/payments"/*, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE*/)
 @RestController
 @RequiredArgsConstructor
 public class PaymentRestController {
@@ -37,6 +39,8 @@ public class PaymentRestController {
         return ResponseEntity.created(locationUri).body(paymentDto);
     }
 
+    //@Secured("ROLE_ADMIN")
+    //@RolesAllowed("ROLE_ADMIN")
     @GetMapping("{id}")
     public PaymentDto getPaymentById(@PathVariable String id) {
         var payment = paymentService.getById(id);

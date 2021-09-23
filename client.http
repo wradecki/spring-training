@@ -10,6 +10,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/api/payments/bc3235e8-8d0f-4bab-bec3-0a648ac1e66
+Authorization: Basic dXNlcjoxMjM=
 Accept: application/json
 Content-Type: application/json
 
